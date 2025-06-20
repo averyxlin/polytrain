@@ -1,7 +1,8 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import TrainCar from './components/TrainCar';
+import TrainCar, { PassengerCar } from './components/TrainCar';
+import TrainConnector from './components/TrainConnector';
 import Cloud from './components/Cloud';
 import './App.css';
 
@@ -19,8 +20,20 @@ function App() {
       <Cloud position={[-5, 9, -20]} scale={[1.5, 1.5, 1.5]} />
       <Cloud position={[5, 11, -30]} scale={[2, 2, 2]} />
 
+      {/* locomotive */}
       <TrainCar position={[0, -0.95, 0]} rotation={[0, -Math.PI / 2, 0]}/>
       
+      {/* connector between locomotive and passenger car */}
+      <TrainConnector position={[0, -0.7, -2.65]} rotation={[0, -Math.PI / 2, 0]}/>
+      
+      {/* passenger car - positioned behind the locomotive */}
+      <PassengerCar position={[0, -0.95, -5.1]} rotation={[0, -Math.PI / 2, 0]}/>
+      
+      {/* connector between passenger car and cargo car */}
+      <TrainConnector position={[0, -0.7, -7.55]} rotation={[0, -Math.PI / 2, 0]}/>
+      
+      {/* cargo car - positioned behind the passenger car */}
+      <PassengerCar position={[0, -0.95, -10]} rotation={[0, -Math.PI / 2, 0]}/>
 
       {/* grass */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]} receiveShadow>
