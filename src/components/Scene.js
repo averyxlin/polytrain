@@ -1,7 +1,7 @@
 import React from 'react';
 import Cloud from './Cloud';
 import Grass from './Grass';
-import Road from './Road';
+import Railroad from './Railroad';
 import Train from './Train';
 
 const Scene = () => {
@@ -15,7 +15,7 @@ const Scene = () => {
       <Cloud position={[5, 11, -30]} scale={[2, 2, 2]} />
 
       <Grass />
-      <Road />
+      <Railroad />
       <Train />
     </>
   );
