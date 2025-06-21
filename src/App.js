@@ -1,7 +1,7 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import Scene from './components/Scene';
-import Sky from './components/Sky';
+import Sky from './components/sky/Sky';
 import './App.css';
 
 function App() {

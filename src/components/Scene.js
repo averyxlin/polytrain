@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Cloud from './Cloud';
-import Grass from './Grass';
-import Railroad from './Railroad';
-import Train from './Train';
-import Camera from './Camera';
-import Controls from './Controls';
+import Cloud from './sky/Cloud';
+import Grass from './ground/Grass';
+import Railroad from './ground/Railroad';
+import Train from './train/Train';
+import Camera from './camera/Camera';
+import Controls from './camera/Controls';
 
 const Scene = () => {
   const [trainPosition, setTrainPosition] = useState(0);
