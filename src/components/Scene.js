@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Cloud from './Cloud';
 import Grass from './Grass';
 import Railroad from './Railroad';
 import Train from './Train';
+import Camera from './Camera';
+import Controls from './Controls';
 
 const Scene = () => {
+  const [trainPosition, setTrainPosition] = useState(0);
+  const [controlsEnabled, setControlsEnabled] = useState(false);
+
+  const handleTrainPositionChange = (position) => {
+    setTrainPosition(position);
+  };
+
+  const handleZoomComplete = () => {
+    setControlsEnabled(true);
+  };
+
   return (
     <>
       <Cloud position={[-15, 8, -25]} scale={[2, 2, 2]} />
@@ -16,7 +29,12 @@ const Scene = () => {
 
       <Grass />
       <Railroad />
-      <Train />
+      <Train onPositionChange={handleTrainPositionChange} />
+      <Camera 
+        trainPosition={trainPosition} 
+        onZoomComplete={handleZoomComplete} 
+      />
+      <Controls enabled={controlsEnabled} />
     </>
   );
 };

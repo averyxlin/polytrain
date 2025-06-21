@@ -4,23 +4,25 @@ import TrainCar from './TrainCar';
 import TrainConnector from './TrainConnector';
 import Locomotive from './Locomotive';
 
-const Train = () => {
+const Train = ({ onPositionChange }) => {
   const [trainPosition, setTrainPosition] = useState(0); // Position along the railroad (z-axis)
   const [isMoving, setIsMoving] = useState(false);
   const [moveDirection, setMoveDirection] = useState(0); // -1 for left, 1 for right, 0 for stopped
   const [keysPressed, setKeysPressed] = useState(new Set());
 
   useEffect(() => {
+    if (onPositionChange) {
+      onPositionChange(trainPosition);
+    }
+  }, [trainPosition, onPositionChange]);
+
+  useEffect(() => {
     const handleKeyDown = (event) => {
       const key = event.key.toLowerCase();
       if (key === 'a' || key === 'arrowleft') {
         setKeysPressed(prev => new Set([...prev, 'left']));
-        setMoveDirection(1);
-        setIsMoving(true);
       } else if (key === 'd' || key === 'arrowright') {
         setKeysPressed(prev => new Set([...prev, 'right']));
-        setMoveDirection(-1);
-        setIsMoving(true);
       }
     };
 
@@ -70,13 +72,7 @@ const Train = () => {
     if (isMoving) {
       const speed = 5;
       const newPosition = trainPosition + moveDirection * speed * delta;
-      
-      const minPosition = -45;
-      const maxPosition = 45;
-      
-      if (newPosition >= minPosition && newPosition <= maxPosition) {
-        setTrainPosition(newPosition);
-      }
+      setTrainPosition(newPosition);
     }
   });
 

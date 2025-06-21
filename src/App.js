@@ -2,16 +2,14 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import Scene from './components/Scene';
 import Sky from './components/Sky';
-import Controls from './components/Controls';
 import './App.css';
 
 function App() {
   return (
     <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-      <Canvas shadows camera={{ position: [5, 5, 5], fov: 25 }}>
+      <Canvas shadows camera={{ fov: 25 }}>
         <Sky />
         <Scene />
-        <Controls />
       </Canvas>
       
       {/* Controls overlay */}
@@ -28,8 +26,8 @@ function App() {
         zIndex: 1000
       }}>
         <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>Train Controls:</div>
-        <div>A / ← - Move Right</div>
-        <div>D / → - Move Left</div>
+        <div>A / ← - Backward</div>
+        <div>D / → - Forward</div>
       </div>
     </div>
   );
