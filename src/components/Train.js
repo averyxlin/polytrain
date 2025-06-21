@@ -10,17 +10,16 @@ const Train = () => {
   const [moveDirection, setMoveDirection] = useState(0); // -1 for left, 1 for right, 0 for stopped
   const [keysPressed, setKeysPressed] = useState(new Set());
 
-  // Handle keyboard events
   useEffect(() => {
     const handleKeyDown = (event) => {
       const key = event.key.toLowerCase();
       if (key === 'a' || key === 'arrowleft') {
         setKeysPressed(prev => new Set([...prev, 'left']));
-        setMoveDirection(-1);
+        setMoveDirection(1);
         setIsMoving(true);
       } else if (key === 'd' || key === 'arrowright') {
         setKeysPressed(prev => new Set([...prev, 'right']));
-        setMoveDirection(1);
+        setMoveDirection(-1);
         setIsMoving(true);
       }
     };
@@ -51,16 +50,15 @@ const Train = () => {
     };
   }, []);
 
-  // Update movement direction based on currently pressed keys
   useEffect(() => {
     if (keysPressed.has('left') && keysPressed.has('right')) {
       setMoveDirection(0);
       setIsMoving(false);
     } else if (keysPressed.has('left')) {
-      setMoveDirection(-1);
+      setMoveDirection(1);
       setIsMoving(true);
     } else if (keysPressed.has('right')) {
-      setMoveDirection(1);
+      setMoveDirection(-1);
       setIsMoving(true);
     } else {
       setMoveDirection(0);
@@ -68,15 +66,13 @@ const Train = () => {
     }
   }, [keysPressed]);
 
-  // Animation loop for train movement
   useFrame((state, delta) => {
     if (isMoving) {
-      const speed = 5; // Units per second
+      const speed = 5;
       const newPosition = trainPosition + moveDirection * speed * delta;
       
-      // Limit movement to railroad bounds (adjust these values based on your railroad length)
-      const minPosition = -45; // Left boundary
-      const maxPosition = 45;  // Right boundary
+      const minPosition = -45;
+      const maxPosition = 45;
       
       if (newPosition >= minPosition && newPosition <= maxPosition) {
         setTrainPosition(newPosition);
@@ -89,21 +85,21 @@ const Train = () => {
       {/* locomotive */}
       <Locomotive 
         position={[0, -0.65, 0]} 
-        rotation={[0, -Math.PI / 2, 0]}
+        rotation={[0, Math.PI / 2, 0]}
         isMoving={isMoving}
       />
       
       {/* connector between locomotive and passenger car */}
-      <TrainConnector position={[0, -0.4, -2.65]} rotation={[0, -Math.PI / 2, 0]}/>
+      <TrainConnector position={[0, -0.4, 2.65]} rotation={[0, Math.PI / 2, 0]}/>
       
       {/* passenger car - positioned behind the locomotive */}
-      <TrainCar position={[0, -0.65, -5.1]} rotation={[0, -Math.PI / 2, 0]}/>
+      <TrainCar position={[0, -0.65, 5.1]} rotation={[0, Math.PI / 2, 0]}/>
       
       {/* connector between passenger car and cargo car */}
-      <TrainConnector position={[0, -0.4, -7.55]} rotation={[0, -Math.PI / 2, 0]}/>
+      <TrainConnector position={[0, -0.4, 7.55]} rotation={[0, Math.PI / 2, 0]}/>
       
       {/* cargo car - positioned behind the passenger car */}
-      <TrainCar position={[0, -0.65, -10]} rotation={[0, -Math.PI / 2, 0]}/>
+      <TrainCar position={[0, -0.65, 10]} rotation={[0, Math.PI / 2, 0]}/>
     </group>
   );
 };

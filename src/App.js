@@ -28,8 +28,8 @@ function App() {
         zIndex: 1000
       }}>
         <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>Train Controls:</div>
-        <div>A / ← - Move Left</div>
-        <div>D / → - Move Right</div>
+        <div>A / ← - Move Right</div>
+        <div>D / → - Move Left</div>
       </div>
     </div>
   );
