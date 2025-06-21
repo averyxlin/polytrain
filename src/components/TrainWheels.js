@@ -1,14 +1,14 @@
 import React from 'react';
 
 const Wheel = ({ position, radius, width }) => (
-    <mesh position={position}>
+    <mesh position={position} castShadow>
         <cylinderGeometry args={[radius, radius, width, 16]} />
         <meshStandardMaterial color="#808080" />
     </mesh>
 );
 
 const Axle = ({ position, length }) => (
-    <mesh position={position}>
+    <mesh position={position} castShadow>
         <cylinderGeometry args={[0.05, 0.05, length, 8]} />
         <meshStandardMaterial color="#3b3b3b" />
     </mesh>
@@ -38,11 +38,11 @@ const TrainWheels = ({ positionZ }) => {
             <Axle position={[frontWheelX, 0, positionZ]} length={axleWidth} />
 
             {/* Connecting Rods */}
-            <mesh position={[0, -rodY, positionZ]}>
+            <mesh position={[0, -rodY, positionZ]} castShadow>
                 <boxGeometry args={[rodLength, 0.1, 0.05]} />
                 <meshStandardMaterial color="#3b3b3b" />
             </mesh>
-            <mesh position={[0, rodY, positionZ]}>
+            <mesh position={[0, rodY, positionZ]} castShadow>
                 <boxGeometry args={[rodLength, 0.1, 0.05]} />
                 <meshStandardMaterial color="#3b3b3b" />
             </mesh>
