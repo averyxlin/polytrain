@@ -1,13 +1,97 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useFrame } from '@react-three/fiber';
 import TrainCar from './TrainCar';
 import TrainConnector from './TrainConnector';
 import Locomotive from './Locomotive';
 
 const Train = () => {
+  const [trainPosition, setTrainPosition] = useState(0); // Position along the railroad (z-axis)
+  const [isMoving, setIsMoving] = useState(false);
+  const [moveDirection, setMoveDirection] = useState(0); // -1 for left, 1 for right, 0 for stopped
+  const [keysPressed, setKeysPressed] = useState(new Set());
+
+  // Handle keyboard events
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      const key = event.key.toLowerCase();
+      if (key === 'a' || key === 'arrowleft') {
+        setKeysPressed(prev => new Set([...prev, 'left']));
+        setMoveDirection(-1);
+        setIsMoving(true);
+      } else if (key === 'd' || key === 'arrowright') {
+        setKeysPressed(prev => new Set([...prev, 'right']));
+        setMoveDirection(1);
+        setIsMoving(true);
+      }
+    };
+
+    const handleKeyUp = (event) => {
+      const key = event.key.toLowerCase();
+      if (key === 'a' || key === 'arrowleft') {
+        setKeysPressed(prev => {
+          const newKeys = new Set(prev);
+          newKeys.delete('left');
+          return newKeys;
+        });
+      } else if (key === 'd' || key === 'arrowright') {
+        setKeysPressed(prev => {
+          const newKeys = new Set(prev);
+          newKeys.delete('right');
+          return newKeys;
+        });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
+  // Update movement direction based on currently pressed keys
+  useEffect(() => {
+    if (keysPressed.has('left') && keysPressed.has('right')) {
+      setMoveDirection(0);
+      setIsMoving(false);
+    } else if (keysPressed.has('left')) {
+      setMoveDirection(-1);
+      setIsMoving(true);
+    } else if (keysPressed.has('right')) {
+      setMoveDirection(1);
+      setIsMoving(true);
+    } else {
+      setMoveDirection(0);
+      setIsMoving(false);
+    }
+  }, [keysPressed]);
+
+  // Animation loop for train movement
+  useFrame((state, delta) => {
+    if (isMoving) {
+      const speed = 5; // Units per second
+      const newPosition = trainPosition + moveDirection * speed * delta;
+      
+      // Limit movement to railroad bounds (adjust these values based on your railroad length)
+      const minPosition = -45; // Left boundary
+      const maxPosition = 45;  // Right boundary
+      
+      if (newPosition >= minPosition && newPosition <= maxPosition) {
+        setTrainPosition(newPosition);
+      }
+    }
+  });
+
   return (
-    <group>
+    <group position={[0, 0, trainPosition]}>
       {/* locomotive */}
-      <Locomotive position={[0, -0.65, 0]} rotation={[0, -Math.PI / 2, 0]}/>
+      <Locomotive 
+        position={[0, -0.65, 0]} 
+        rotation={[0, -Math.PI / 2, 0]}
+        isMoving={isMoving}
+      />
       
       {/* connector between locomotive and passenger car */}
       <TrainConnector position={[0, -0.4, -2.65]} rotation={[0, -Math.PI / 2, 0]}/>

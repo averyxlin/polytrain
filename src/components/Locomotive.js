@@ -2,7 +2,7 @@ import React from 'react';
 import TrainWheels from './TrainWheels';
 import TrainSmoke from './TrainSmoke';
 
-const Locomotive = ({position, rotation}) => {
+const Locomotive = ({position, rotation, isMoving = false}) => {
   return (
     <group position={position} rotation={rotation}>
       <TrainWheels positionZ={0.45} />
@@ -53,7 +53,7 @@ const Locomotive = ({position, rotation}) => {
         <meshStandardMaterial color="#e07b7b" />
       </mesh>
       
-      <TrainSmoke />
+      <TrainSmoke isMoving={isMoving} />
     </group>
   );
 };
