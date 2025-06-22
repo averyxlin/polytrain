@@ -5,6 +5,7 @@ import Railroad from './ground/Railroad';
 import Train from './train/Train';
 import Camera from './camera/Camera';
 import Controls from './camera/Controls';
+import ForestModel from './trees/ForestModel';
 
 const Scene = () => {
   const [trainPosition, setTrainPosition] = useState(0);
@@ -27,6 +28,7 @@ const Scene = () => {
       <Cloud position={[-5, 9, -20]} scale={[1.5, 1.5, 1.5]} />
       <Cloud position={[5, 11, -30]} scale={[2, 2, 2]} />
 
+      <ForestModel position={[-10, -3.2, 0]} />
       <GrassField />
       <Railroad />
       <Train onPositionChange={handleTrainPositionChange} />
