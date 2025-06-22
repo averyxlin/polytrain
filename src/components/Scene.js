@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Cloud from './sky/Cloud';
-import Grass from './ground/Grass';
+import GrassField from './ground/GrassField';
 import Railroad from './ground/Railroad';
 import Train from './train/Train';
 import Camera from './camera/Camera';
@@ -27,7 +27,7 @@ const Scene = () => {
       <Cloud position={[-5, 9, -20]} scale={[1.5, 1.5, 1.5]} />
       <Cloud position={[5, 11, -30]} scale={[2, 2, 2]} />
 
-      <Grass />
+      <GrassField />
       <Railroad />
       <Train onPositionChange={handleTrainPositionChange} />
       <Camera 
