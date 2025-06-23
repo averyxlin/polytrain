@@ -2,6 +2,7 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import Scene from './components/Scene';
 import Sky from './components/sky/Sky';
+import FPSTracker from './components/FPSTracker';
 import './App.css';
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
         <Scene />
       </Canvas>
       
-      {/* Controls overlay */}
+      {/* controls overlay */}
       <div style={{
         position: 'absolute',
         top: '20px',
@@ -29,6 +30,9 @@ function App() {
         <div>A / ← - Backward</div>
         <div>D / → - Forward</div>
       </div>
+
+      {/* FPS Tracker */}
+      <FPSTracker />
     </div>
   );
 }
