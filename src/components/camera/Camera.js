@@ -11,8 +11,8 @@ const Camera = ({ trainPosition, onZoomComplete }) => {
   const pauseDuration = 4; 
   const zoomOutDuration = 8;
 
-  const zoomedInPosition = useRef(new Vector3(2, 3, 0)); // start zoomed in - centered on locomotive body
-  const maxZoomOutPosition = useRef(new Vector3(50, 15, 0)); // max zoom out
+  const zoomedInPosition = useRef(new Vector3(2, 10, 0)); 
+  const maxZoomOutPosition = useRef(new Vector3(40, 12, 0)); 
 
   useEffect(() => {
     isMounted.current = true;
@@ -88,4 +88,4 @@ const Camera = ({ trainPosition, onZoomComplete }) => {
   return null;
 };
 
-export default Camera; 
+export default Camera;
