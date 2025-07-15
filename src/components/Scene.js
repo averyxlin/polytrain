@@ -5,7 +5,6 @@ import Railroad from './ground/Railroad';
 import Train from './train/Train';
 import Camera from './camera/Camera';
 import Controls from './camera/Controls';
-import ForestLine from './trees/ForestLine';
 
 const Scene = () => {
   const [trainPosition, setTrainPosition] = useState(0);
@@ -33,7 +32,6 @@ const Scene = () => {
         maxScale={3}
       />
 
-      <ForestLine startZ={-500} endZ={500} x={-8.2} y={-3.2} interval={10} />
       <GrassField />
       <Railroad />
       <Train onPositionChange={handleTrainPositionChange} />
@@ -46,4 +44,4 @@ const Scene = () => {
   );
 };
 
-export default Scene; 
+export default Scene;
