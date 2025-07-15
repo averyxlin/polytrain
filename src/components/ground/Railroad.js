@@ -1,14 +1,14 @@
 import React from 'react';
 
-const TIE_WIDTH = 0.2;
-const TIE_HEIGHT = 0.1;
-const TIE_LENGTH = 2.5;
-const TIE_SPACING = 0.6;
+const TIE_WIDTH = 0.1;
+const TIE_HEIGHT = 0.05;
+const TIE_LENGTH = 1.25;
+const TIE_SPACING = 0.3;
 
-const RAIL_WIDTH = 0.15;
-const RAIL_HEIGHT = 0.2;
+const RAIL_WIDTH = 0.075;
+const RAIL_HEIGHT = 0.1;
 const RAIL_LENGTH = 1000;
-const RAIL_SPACING = 1.5;
+const RAIL_SPACING = 0.75;
 
 const RailroadTie = ({ position }) => (
   <mesh position={position}>
@@ -30,18 +30,18 @@ const Railroad = () => {
     ties.push(
       <RailroadTie
         key={i}
-        position={[0, -0.4, -RAIL_LENGTH / 2 + i * TIE_SPACING]}
+        position={[0, -0.2, -RAIL_LENGTH / 2 + i * TIE_SPACING]}
       />
     );
   }
 
   return (
     <group>
-      <Rail position={[-RAIL_SPACING / 2, -0.4 + (TIE_HEIGHT + RAIL_HEIGHT) / 2, 0]} />
-      <Rail position={[RAIL_SPACING / 2, -0.4 + (TIE_HEIGHT + RAIL_HEIGHT) / 2, 0]} />
+      <Rail position={[-RAIL_SPACING / 2, -0.2 + (TIE_HEIGHT + RAIL_HEIGHT) / 2, 0]} />
+      <Rail position={[RAIL_SPACING / 2, -0.2 + (TIE_HEIGHT + RAIL_HEIGHT) / 2, 0]} />
       {ties}
     </group>
   );
 };
 
-export default Railroad; 
+export default Railroad;

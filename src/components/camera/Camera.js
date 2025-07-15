@@ -12,7 +12,7 @@ const Camera = ({ trainPosition, onZoomComplete }) => {
   const zoomOutDuration = 8;
 
   const zoomedInPosition = useRef(new Vector3(2, 10, 0)); 
-  const maxZoomOutPosition = useRef(new Vector3(40, 12, 0)); 
+  const maxZoomOutPosition = useRef(new Vector3(14, 5, 0));
 
   useEffect(() => {
     isMounted.current = true;

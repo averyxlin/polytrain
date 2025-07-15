@@ -77,7 +77,7 @@ const Train = ({ onPositionChange }) => {
   });
 
   return (
-    <group position={[0, 0, trainPosition]}>
+    <group position={[0, 0, trainPosition]} scale={[0.5, 0.5, 0.5]}>
       {/* locomotive */}
       <Locomotive 
         position={[0, -0.65, 0]} 
@@ -100,4 +100,4 @@ const Train = ({ onPositionChange }) => {
   );
 };
 
-export default Train; 
+export default Train;
